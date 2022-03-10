@@ -11,6 +11,22 @@ ActiveAdmin.register Subject do
     end
   end
 
+  index do
+    selectable_column
+    column :id
+    column "Subject" do |subj|
+      link_to subj.name, admin_note_path(subj)
+    end
+    column "Created At" do |created|
+      created.created_at.strftime("%a %b %e at %l:%M %p")
+    end
+
+    column "Updated At" do |updated|
+      updated.updated_at.strftime("%a %b %e at %l:%M %p")
+    end
+    actions
+  end
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
