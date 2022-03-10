@@ -5,9 +5,30 @@ ActiveAdmin.register Note do
     f.inputs "Note" do
       f.input :subject
       f.input :title
-      f.input :body
+      f.input :body, as: :quill_editor
     end
     f.actions
+  end
+
+  show title: "Your Note" do
+    h1 link_to note.title, admin_notes_path
+    h4 link_to note.subject.name, admin_subject_path
+    div(class: "note-body") do
+      raw note.body
+    end
+  end
+
+  index do
+    selectable_column
+    column :id
+    column :subject
+    column "Title" do |note|
+      link_to note.title, admin_note_path(note)
+    end
+    column "Body" do |note|
+      raw note.body.truncate_words(15)
+    end
+    actions
   end
 
   # See permitted parameters documentation:
