@@ -28,6 +28,12 @@ ActiveAdmin.register Note do
     column "Body" do |note|
       raw note.body.truncate_words(15)
     end
+    column "Created At" do |created|
+      created.created_at.strftime("%a %b %e at %l:%M %p")
+    end
+    column "Updated At" do |updated|
+      updated.updated_at.strftime("%a %b %e at %l:%M %p")
+    end
     actions
   end
 
